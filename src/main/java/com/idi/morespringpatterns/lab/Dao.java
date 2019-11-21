@@ -5,4 +5,9 @@ package com.idi.morespringpatterns.lab;
  */
 public interface Dao {
     void save();
+
+    boolean isActive();
+
+    void setActive(boolean flag);
+
 }

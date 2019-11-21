@@ -5,9 +5,8 @@ import org.springframework.stereotype.Repository;
 /**
  * @author Evgeny Borisov
  */
-@Repository
-@Db(DBType.SYBASE)
-public class SybaseDao implements Dao {
+@Repository("sybase")
+public class SybaseDao extends AbstractDao {
     @Override
     public void save() {
         System.out.println("Saved to sybase");

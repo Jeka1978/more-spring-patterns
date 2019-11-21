@@ -6,11 +6,13 @@ import org.springframework.stereotype.Repository;
  * @author Evgeny Borisov
  */
 
-@Repository
-@Db(DBType.ORACLE)
-public class OracleDao implements Dao {
+@Repository("oracle")
+public class OracleDao extends AbstractDao {
     @Override
     public void save() {
         System.out.println("Saved to oracle");
     }
+
+
+
 }

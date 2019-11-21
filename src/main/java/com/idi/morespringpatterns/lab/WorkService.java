@@ -3,42 +3,39 @@ package com.idi.morespringpatterns.lab;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author Evgeny Borisov
  */
 @Service
 public class WorkService {
 
-    private boolean isOracle;
-
-    public void setOracle(boolean oracle) {
-        isOracle = oracle;
-    }
 
     @Autowired
-    @Db(DBType.ORACLE)
-    private Dao oracleDao;
-
-    @Autowired
-    @Db(DBType.SYBASE)
-    private Dao sybaseDao;
-
+    private Map<String,Dao> daos;
 
 
 
     public void doWork(){
-        if (isOracle) {
-            oracleDao.save();
-        }else {
-            sybaseDao.save();
-        }
+       daos.values().stream().filter(Dao::isActive).forEach(Dao::save);
+
     }
 
-    public void switchDb(String db) {
-        if (db.equals("oracle")) {
-            isOracle=true;
-        }else {
-            isOracle=false;
+    public void setDbStatus(String dbName, boolean flag) {
+        Dao dao = daos.get(dbName);
+        if (dao == null) {
+            throw new UnsupportedOperationException(dbName + " not supported yet");
         }
+        dao.setActive(flag);
     }
 }
+
+
+
+
+
+
+
+

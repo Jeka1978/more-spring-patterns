@@ -24,8 +24,8 @@ public class WorkController {
     }
 
     @GetMapping("/switchdb")
-    public void switchDB(@RequestParam("db")String db){
-        workService.switchDb(db);
+    public void switchDB(@RequestParam("db")String db,@RequestParam("flag")boolean flag){
+        workService.setDbStatus(db,flag);
     }
 
 
