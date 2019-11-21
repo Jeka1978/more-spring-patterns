@@ -18,7 +18,7 @@ public class WorkController {
     }
 
     @GetMapping("/switchdb")
-    public void doWork(@RequestParam("db")String db){
+    public void switchDB(@RequestParam("db")String db){
         // change to requested database
     }
 
